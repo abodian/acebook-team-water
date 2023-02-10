@@ -56,20 +56,6 @@ const Feed = ({ navigate }) => {
     setMessage(event.target.value);
   };
 
-  const handleDeletePost = async (id) => {
-    await fetch(`/posts/${id}`, {
-      method: "delete",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.status === 200) {
-        setPosts(posts.filter((post) => post._id !== id));
-      }
-    });
-  };
-
   /////////////////////////
   // Below is the code for the form that posts the new message
   /////////////////////////
@@ -102,10 +88,12 @@ const Feed = ({ navigate }) => {
           <div id="feed" role="feed">
             {posts.map((post) => (
               <div key={post._id}>
-                <Post post={post} />
-                <button onClick={() => handleDeletePost(post._id)}>
-                  Delete
-                </button>
+                <Post
+                  post={post}
+                  setPosts={setPosts}
+                  posts={posts}
+                  token={token}
+                />
               </div>
             ))}
           </div>
