@@ -75,6 +75,8 @@ const handleAuthorChange = (event) => {
 /////////////////////////
 // Below is the code for the form that posts the new message
 /////////////////////////
+
+
   if (token) {
     return (
       <>
@@ -113,6 +115,5 @@ const handleAuthorChange = (event) => {
   } else {
     navigate("/signin");
   }
-};
-
-export default Feed;
+  };
+  export default Feed;
