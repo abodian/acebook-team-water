@@ -21,7 +21,9 @@ const Post = ({ post, setPosts, posts, token }) => {
       <article data-cy="post" key={post._id}>
         {post.message}
       </article>
-      <button onClick={() => handleDeletePost(post._id)}>Delete</button>
+      <button data-cy="delete" onClick={() => handleDeletePost(post._id)}>
+        Delete
+      </button>
     </div>
   );
 };
