@@ -6,6 +6,9 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
 
   // const [likes, setLikes] = useState(post.likes || 0);  changed by chatgp for the below
   const [likes, setLikes] = useState(post.likes ? post.likes.length : 0);
+  
+  const [comLikes, setComLikes] = useState(post.comments.comLikes ? post.comments.comLikes.length : 0);
+  
 
 
 
@@ -152,6 +155,48 @@ const handleUnLike = async () => {
   }
 };
 
+
+/////////////////////////////////////
+
+const handleComLike = async (comment) => {
+  try {
+    const response = await fetch(`/posts/${post._id}/comments/${comment._id}/comlike`, {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        comId: comment._id, 
+        postId: post._id, 
+        userId: `${user.userId}` 
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.comments[0].comLikes.length);
+      setComLikes(data.comments[0].comLikes.length);
+    } else {
+      console.log(`Failed to like comment with ID ${comment._id}`);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const handleComUnLike = async () => {
+}
+
+
+
+//////////////////////////////////////
+
+
+
+
+
+
   return (
     <>
       <div class="postContent">{post.message}</div>
@@ -200,6 +245,13 @@ const handleUnLike = async () => {
                   {comment.message}
                   <br />
                   {formattedDate(comment.timeStamp)}
+                  
+                  <div class="comlikesDiv">   
+                    <button id="comlike" onClick={() => handleComLike(comment)}>Like Comment</button> {/* added this. think the post._id needs changing */}
+                    <button id="comunlike" onClick={() => handleComUnLike(comment._id)}>Unlike Comment</button>  {/* added this. think the post._id needs changing */}
+                    <p class="comlikesText">Likes: {comLikes}</p>
+                  </div>
+                
                 </div>
               ))
             ) : (

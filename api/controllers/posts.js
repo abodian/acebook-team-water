@@ -105,6 +105,88 @@ Unlike: (req, res) => {
       }
     );
   },
+
+
+  ///////////////////////////////////////
+
+  AddComlike: (req, res) => {
+    const { postId, comId, userId } = req.body;
+    Post.findById(postId, (err, post) => {
+        if (err) {
+            return res.status(422).json({ error: err });
+        }
+        const comment = post.comments.find(c => c._id.equals(comId));
+        if (!comment) {
+            return res.status(404).json({ error: 'Comment not found' });
+        }
+        if (comment.comLikes.includes(userId)) {
+            return res.status(422).json({ error: 'User has already liked this comment' });
+        }
+        comment.comLikes.push(userId);
+        post.save((err, savedPost) => {
+            if (err) {
+                return res.status(422).json({ error: err });
+            }
+            res.json(savedPost);
+        });
+    });
+},
+
+
+
+  // AddComlike: (req, res) => {
+  //   console.log(req.body.postId, req.body.comId, req.body.userId);
+    
+  //   Post.findById(req.body.comId, (err, post) => {
+  //       if (err) {
+  //           return res.status(422).json({ error: err });
+  //       }
+  //       if (post.comments.comLikes.includes(req.body.userId)) {
+  //           return res.status(422).json({ error: 'User has already liked this comment' });
+  //       }
+  //       Post.findByIdAndUpdate(req.body.comId, {    //////////it's possible that it should be req.body.postid.commId
+  //           $push: { comLikes: req.body.userId }
+  //       }, {
+  //           new: true
+  //       }).exec((err, result) => {
+  //           if (err) {
+  //               return res.status(422).json({ error: err });
+  //           } else {
+  //               res.json(result);
+  //           }
+  //       });
+  //   });
+  // },
+
+
+  // UnComlike: (req, res) => {
+  //   console.log(req.body.postId,req.body.userId);
+  //   Post.findByIdAndUpdate(req.body.postId,{
+  //     $pull:{likes:req.body.userId}
+  //   },{
+  //     new:true
+  //   }).exec((err,result) => {
+  //       if(err){
+  //         return res.status(422).json({error:err})
+  //       }else{
+  //         res.json(result)
+  //       }
+  //   })
+  // },
+
+
+
+
+
+
+  ///////////////////////////////////////
+
+
+
+
+
+
+
 };
 
 module.exports = PostsController;
