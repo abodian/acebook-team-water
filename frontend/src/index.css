@@ -81,6 +81,16 @@ input::placeholder {
   text-align: left;
 }
 
+#profileComponent {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+}
+
 #feedComponent {
   padding-left: 55px;
   padding-top: 20px;

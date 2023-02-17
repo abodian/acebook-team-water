@@ -133,7 +133,7 @@ const Profile = ({ navigate }) => {
               <br></br>
             </ul>
           </nav>
-          <div id="feedComponent">
+          <div id="profileComponent">
             <h1 id="profile-title">{`${user.firstName} ${user.lastName}'s Profile Page`}</h1>
             <img
               className="profilePagePicture"
