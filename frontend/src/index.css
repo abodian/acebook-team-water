@@ -216,7 +216,7 @@ input::placeholder {
   border: solid;
   border-width: 0.75px;
   width: 480px;
-  margin-top: 75px;
+  margin-top: 30px;
   margin-bottom: 10px;
   word-wrap: break-word;
   align-self: flex-end;
@@ -1048,8 +1048,8 @@ button:focus {
 
 .profilePic {
   display: inline-block;
-  height: 50px;
-  width: 50px;
-  margin-right: 450px;
+  height: 80px;
+  width: 85px;
+  margin-right: 610px;
   border-radius: 50%;
 }
