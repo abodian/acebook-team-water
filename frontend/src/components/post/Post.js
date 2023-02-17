@@ -70,30 +70,35 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment, imag
     setShowComments(!showComments);
   };
 
-useEffect(() => {
-  const fetchLikesCount = async () => {
-    try {
-      const response = await fetch(`/posts/${post._id}/likes`, {
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setLikes(data.likes.length);
-      } else {
-        console.log(`Failed to fetch likes count for post with ID ${post._id}`);
+  useEffect(() => {
+    const fetchLikesCount = async () => {
+      try {
+        const response = await fetch(`/posts/${post._id}/likes`, {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          setLikes(data.likes.length);
+        } else if (response.status === 404) {
+          // Handle the 404 status here
+          // console.log(`Failed to fetch likes count for post with ID ${post._id}`);
+       return
+        }
+      } catch (error) {
+        // Remove the console.error statement
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  fetchLikesCount();
-}, [post._id, token]);
+    };
+  
+    fetchLikesCount();
+  }, [post._id, token]);
+  
+  
+  
 
 
 const handleLike = async () => {
@@ -112,10 +117,11 @@ const handleLike = async () => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data.likes)
+      // console.log(data.likes)
       setLikes(data.likes.length);
     } else {
-      console.log(`Failed to like post with ID ${post._id}`);
+
+      // console.log(`Failed to like post with ID ${post._id}`);
     }
   } catch (error) {
     console.error(error);
@@ -139,7 +145,7 @@ const handleUnLike = async () => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data.likes)
+      // console.log(data.likes)
       setLikes(data.likes.length);
     } else {
       console.log(`Failed to unlike post with ID ${post._id}`);

@@ -101,7 +101,7 @@ const Feed = ({ navigate }) => {
   }, []);
   
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
   }, [user]);
   
   const handleSubmitPost = async (event, imageURL) => {
