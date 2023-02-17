@@ -4,11 +4,9 @@ const Post = ({ navigate, post, setPosts, posts, token, user, onAddComment }) =>
   const [comment, setComment] = useState("");
   const [showComments, setShowComments] = useState(false);
 
-  // const [likes, setLikes] = useState(post.likes || 0);  changed by chatgp for the below
   const [likes, setLikes] = useState(post.likes ? post.likes.length : 0);
   
-  const [comLikes, setComLikes] = useState(post.comments.comLikes ? post.comments.comLikes.length : 0);
-  
+  const [comLikes, setComLikes] = useState(post.comments.comLikes ? post.comments.comLikes.length : 0);   
 
 
 
@@ -156,7 +154,7 @@ const handleUnLike = async () => {
 };
 
 
-/////////////////////////////////////
+
 
 const handleComLike = async (comment) => {
   try {
@@ -175,8 +173,7 @@ const handleComLike = async (comment) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data.comments[0].comLikes.length);
-      setComLikes(data.comments[0].comLikes.length);
+      setComLikes(data.comLikes.length);
     } else {
       console.log(`Failed to like comment with ID ${comment._id}`);
     }
@@ -186,12 +183,8 @@ const handleComLike = async (comment) => {
 }
 
 const handleComUnLike = async () => {
+  ///////to be written//////
 }
-
-
-
-//////////////////////////////////////
-
 
 
 
@@ -263,5 +256,7 @@ const handleComUnLike = async () => {
     </>
   );
 };
+
+
 
 export default Post;

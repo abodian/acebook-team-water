@@ -10,9 +10,8 @@ router.delete("/:id", PostsController.Delete);
 router.put("/:id/like", PostsController.Addlike);
 router.put("/:id/unlike", PostsController.Unlike);
 
-/////////////////////////////comlikes
+
 router.put("/:id/comments/:id/comlike", PostsController.AddComlike);
-// router.put("/:id/unlike", PostsController.Unlike);
-////////////////////////////////
+// router.put("/:id/comments/:id/uncomlike", PostsController.UnComlike);
 
 module.exports = router;
