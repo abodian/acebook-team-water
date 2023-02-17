@@ -702,6 +702,7 @@ button:focus {
 
 .window {
   z-index: 100;
+  border-radius: 30px;
   color: #fff;
   font-family: roboto;
   position: relative;
@@ -719,7 +720,6 @@ button:focus {
   background: #fff;
   background: url("https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823")
     top left no-repeat;
-  border-radius: 30px;
 }
 
 .overlay {
@@ -731,6 +731,7 @@ button:focus {
   position: absolute;
   width: 360px;
   z-index: 1;
+  border-radius: 30px;
 }
 
 .bold-line {
